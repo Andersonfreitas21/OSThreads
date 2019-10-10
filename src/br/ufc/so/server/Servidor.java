@@ -39,13 +39,15 @@ public class Servidor implements Runnable {
 
 			// Mantem o servidor para diversas conexões
 			while (true) {
+				
 				//Aceitando a conexão do cliente
 				socketCliente = serverSocket.accept();
 				
-				//Ler um cliente via InputStream
+				//Ler o tempo do cliente via InputStream
 				input = new ObjectInputStream(socketCliente.getInputStream());
 				
 				cliente = (Cliente) input.readObject();
+				System.out.println("SERVIDOR: Esperando dados do cliente.");
 				System.out.println("SERVIDOR: Atendendo cliente " + cliente.getId() + " .");
 
 				GerenciadorClientes gerenciadorClientes = new GerenciadorClientes(cliente);

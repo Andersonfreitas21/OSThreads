@@ -18,18 +18,15 @@ public class GerenciadorClientes implements Runnable {
 	@Override
 	public void run() {
 		try {
-
-			System.out.println("CLIENTE : " + cliente.getId() + " Esperando servidor me atender.");
-
 			// Adicionando cliente no fila
 			if (filaClientes.offer(cliente)) {
+				
 				// Aguardando servidor processar
 				Thread.sleep(Long.parseLong(cliente.getTempo()) * 1000);
-				System.out.println("CLIENTE : " + filaClientes.poll().getId() + ": Saindo.");
+				System.out.println("CLIENTE " + filaClientes.poll().getId() + " : Saindo.");
 			} else {
-				System.out.println("CLIENTE : " + cliente.getId() + " Erro: não há vagas.");
+				System.out.println("CLIENTE " + cliente.getId() + " : Erro: não há vagas.");
 			}
-
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -26,10 +26,14 @@ public class Cliente implements Serializable, Runnable {
 	public int getId() {
 		return id;
 	}
+	
+	public void msgCliente() {
+		System.out.println("CLIENTE " + getId() + " : Esperando servidor me atender.");
+	}
 
 	@Override
 	public void run() {
-		System.out.println("CLIENTE " + getId() + " Esperando servidor me atender.");
+		
 	}
 
 }
