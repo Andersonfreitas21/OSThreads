@@ -9,7 +9,7 @@ import br.ufc.so.client.Cliente;
 import br.ufc.so.client.GerenciadorClientes;
 
 public class Servidor implements Runnable {
-	
+
 	private ServerSocket serverSocket;
 	private Socket socketCliente;
 	private ObjectInputStream input;
@@ -26,9 +26,9 @@ public class Servidor implements Runnable {
 			iniciaServidor();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}		
+		}
 	}
-	
+
 	public void iniciaServidor() throws ClassNotFoundException {
 
 		try {
@@ -36,14 +36,18 @@ public class Servidor implements Runnable {
 			serverSocket = new ServerSocket(12345);
 
 			System.out.println("SERVIDOR: Esperando pedidos.");
-			
+
 			// Mantem o servidor para diversas conexões
 			while (true) {
+				//Aceitando a conexão do cliente
 				socketCliente = serverSocket.accept();
+				
+				//Ler um cliente via InputStream
 				input = new ObjectInputStream(socketCliente.getInputStream());
+				
 				cliente = (Cliente) input.readObject();
 				System.out.println("SERVIDOR: Atendendo cliente " + cliente.getId() + " .");
-				
+
 				GerenciadorClientes gerenciadorClientes = new GerenciadorClientes(cliente);
 			}
 
